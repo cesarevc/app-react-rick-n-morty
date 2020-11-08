@@ -1,4 +1,4 @@
-export default async function getAllCharacters() {
+export default function getAllCharacters() {
 
     const apiURL = `https://rickandmortyapi.com/api/character/`;     
 
