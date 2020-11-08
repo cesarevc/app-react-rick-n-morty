@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
+import InputSearch from './InputSearch';
+import MainPanel from './MainPanel';
+import AllCharactersPanel from './AllCharactersPanel';
+import './App.css';
 
-class App extends Component {
 
-    state = {
-        task: {
-            title: 'my first task',
-            done: true
-        }
-    }
+function App () {
 
-    handleClick = () => {
+    
+    
+    const handleClick = () => {
         const task = this.state.task;
         task.done = !task.done;
         this.setState({ task })
     }
+    
 
-    render() {
-        return (
-            <div>
-                <h3>{this.state.task.title}</h3>
-                <h1>
-                    {this.state.task.done.toString()}
-                </h1>
-                <button onClick={this.handleClick}> clicktt </button>
-            </div>
-        );
-    }
+    return (
+        <div className="App">
+
+            <section className="App-SearchBar">
+                <img src="../../public/LOGO.png" alt="logo"  style={{height:120, width: 290, marginBottom: 30}} />
+                <InputSearch />
+            </section>
+
+            <section className="App-content">
+                <AllCharactersPanel />
+            </section>
+
+            
+        </div>
+    );
+    
 }
 
 export default App;
