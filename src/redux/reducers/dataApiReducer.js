@@ -1,22 +1,28 @@
-import { GET_RICK_MORTY_DATA } from '../actions/dataApiAction';
+import { GET_RICK_MORTY_DATA, FIND_CHARACTERS } from '../actions/dataApiAction';
 
-const initialState = {
-    totalCharacters: 0,
-    pages: 0,
-    nextPage: '',
-    prevPage: '',
-    characters : []
+const defaultState = {
+    totalCharactersFound: 0,
+    characters: []
 }
 
 
-const dataApi_reducer = (state = initialState, action) => {
+const dataApi_reducer = (state = defaultState, action) => {
     switch(action.type){
         case GET_RICK_MORTY_DATA: {
             return{
-                ...state, 
-                totalCharacters: state.totalCharacters + 1 //action.payload
+                // ...state, 
+                totalCharactersFound: action.payload.totalCharacters,
+                characters: action.payload.pages
             }
         }
+        case FIND_CHARACTERS: {
+            return{
+                // ...state, 
+                totalCharactersFound: action.payload.totalCharactersFound,
+                characters: action.payload.characters
+            }
+        }
+
         default: return state;
     }
 }

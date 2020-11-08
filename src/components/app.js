@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import InputSearch from './InputSearch';
 import MainPanel from './MainPanel';
+import HeaderBar from './HeaderBar';
 import AllCharactersPanel from './AllCharactersPanel';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
@@ -12,11 +13,7 @@ function App () {
     console.log('estado inicial', store.getState());
 
     
-    const handleClick = () => {
-        const task = this.state.task;
-        task.done = !task.done;
-        this.setState({ task })
-    }
+  
     
 
     return (
@@ -24,10 +21,11 @@ function App () {
 
             <div className="App">
 
-                <section className="App-SearchBar">
-                    <img src="../../public/LOGO.png" alt="logo"  style={{height:120, width: 290, marginBottom: 30}} />
-                    <InputSearch />
-                </section>
+            <HeaderBar />
+
+                
+
+                <MainPanel />
 
                 <section className="App-content">
                     <AllCharactersPanel />
@@ -37,5 +35,7 @@ function App () {
     );
     
 }
+
+
 
 export default App;

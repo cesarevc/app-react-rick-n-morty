@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CharacterCard from '../CharacterCard';
-import getAllCharacters from '../../services/fetch';
+import { getAllCharacters } from '../../services/fetch';
+import { connect } from 'react-redux';
 
 //
 import Grid from '@material-ui/core/Grid';
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function AllCharactersPanel() {
+function AllCharactersPanel(props) {
     const classes = useStyles();
 
 
@@ -40,7 +41,7 @@ function AllCharactersPanel() {
    
     return (<div>
             <Grid container className={classes.root} >
-                {characters.map(character => {
+                {props.data.characters.map(character => {
                     return(
                         <Grid item xs={6} lg={2} sm={4} md={4} align="center" >
                             <CharacterCard image= {character.image} name={character.name} />
@@ -51,4 +52,11 @@ function AllCharactersPanel() {
     
 }
 
-export default AllCharactersPanel;
+
+const mapStateToProps = (state) => {
+    return {
+        data: state.dataApi
+    }
+}
+
+export default connect(mapStateToProps)(AllCharactersPanel);
