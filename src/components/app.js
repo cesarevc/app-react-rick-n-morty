@@ -5,7 +5,7 @@ import HeaderBar from './HeaderBar';
 import AllCharactersPanel from './AllCharactersPanel';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
-import './App.css';
+import './app.css';
 
 
 function App () {
