@@ -1,4 +1,4 @@
-import { GET_RICK_MORTY_DATA, FIND_CHARACTERS } from '../actions/dataApiAction';
+import { RESET_DATA, FIND_CHARACTERS } from '../actions/dataApiAction';
 
 const defaultState = {
     totalCharactersFound: 0,
@@ -8,7 +8,7 @@ const defaultState = {
 
 const dataApi_reducer = (state = defaultState, action) => {
     switch(action.type){
-        case GET_RICK_MORTY_DATA: {
+        case RESET_DATA: {
             return{
                 // ...state, 
                 totalCharactersFound: action.payload.totalCharacters,

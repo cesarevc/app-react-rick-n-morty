@@ -10,21 +10,11 @@ import './App.css';
 
 function App () {
 
-    console.log('estado inicial', store.getState());
-
-    
-  
-    
-
     return (
         <Provider store={store} >
 
             <div className="App">
-
-            <HeaderBar />
-
-                
-
+                <HeaderBar />
                 <MainPanel />
 
                 <section className="App-content">

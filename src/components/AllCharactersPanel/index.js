@@ -1,36 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import CharacterCard from '../CharacterCard';
 import { getAllCharacters } from '../../services/fetch';
+// Redux
 import { connect } from 'react-redux';
-
-//
+// Material UI
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core'
-
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
     },
-   
     control: {
       padding: theme.spacing(2),
     },
-  }));
+}));
+
 
 function AllCharactersPanel(props) {
+
     const classes = useStyles();
 
-
     const [characters, setCharacters] = useState([]);
-
   
     useEffect(() => {
         getAllCharacters()
@@ -39,16 +31,19 @@ function AllCharactersPanel(props) {
         })
     });
    
-    return (<div>
+    return (
+        <div>
             <Grid container className={classes.root} >
                 {props.data.characters.map(character => {
                     return(
                         <Grid item xs={6} lg={2} sm={4} md={4} align="center" >
-                            <CharacterCard image= {character.image} name={character.name} />
-                        </Grid>);
+                            <CharacterCard image= {character.image} name={character.name} character={character} />
+                        </Grid>
+                    );
                 })}
             </Grid>
-    </div>);
+        </div>
+    );
     
 }
 

@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+// Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-
-import { getCharacter } from '../../services/fetch';
+// WEB SERVICES
+import { getCharacter, getListComplete } from '../../services/fetch';
+// Redux
 import { connect } from 'react-redux';
-import { get_characters_found_action } from '../../redux/actions/dataApiAction';
+import { set_characters_found_action } from '../../redux/actions/dataApiAction';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,8 +40,7 @@ function InputSearch( props ) {
 
   const [keyword, setKeyword] = useState('');
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async() => {
     getCharacter(keyword)
     .then(response => {
 
@@ -48,14 +49,17 @@ function InputSearch( props ) {
         characters: response.results
       }
 
-      props.get_characters_found_action(data);
-      //setCharacters(data.results);
-      //guardamos la keyword en localStorage
-      console.log(response.results);
+      props.set_characters_found_action(data);
     })
-    
 
   }
+
+  const handleKeyDown = (e) =>{
+      if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    }
+  
 
   const handleChange = (e) => {
     setKeyword(e.target.value); 
@@ -63,34 +67,29 @@ function InputSearch( props ) {
   };
 
   return (
-
-
       <Paper className={classes.root}>
         <InputBase
           className={classes.input}
           placeholder="Search Your Favorite Character"
-          // inputProps={{ 'aria-label': 'search google maps' }}
           onChange={handleChange}
           value={keyword}
-        
+          onKeyDown={handleKeyDown}
         />
         <Divider className={classes.divider} orientation="vertical" />
         <IconButton 
           className={classes.iconButton} 
           aria-label="search" 
-          //disabled={true}
           onClick={() => handleSubmit() }
         >
           <SearchIcon />
         </IconButton>
       </Paper>
-
   );
 }
 
 
 const mapDispatchToProps = {
-  get_characters_found_action
+  set_characters_found_action
 }
 
 export default connect(null, mapDispatchToProps)(InputSearch);
